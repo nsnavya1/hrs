@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <table>
+
+        <tr>
+            <td><a href="{% url 'Administrator:districtInsertSelect' %}">District</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Administrator:placeInsertSelect' %}">Place</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Administrator:admindetails' %}">AdminRegistration</a> </td>
+        </tr>
+
+       
+        <tr>
+            <td><a href="{% url 'Administrator:userListNew' %}">UserListNew</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Administrator:userListAccepted' %}">UserListAccepted</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Administrator:userListRejected' %}">UserListRejected</a></td>
+        </tr>
+
+        <tr>
+            <td><a href="{% url 'Administrator:hotelListNew' %}">HotelListNew</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Administrator:hotelListAccepted' %}">HotelListAccepted</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'Administrator:hotelListRejected' %}">HotelListRejected</a></td>
+        </tr>
+        
+       
+        
+    </table>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="1">     
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="txtname" placeholder="Enter Hotel Name" required></td>
+           </tr>
+    
+           <tr>
+            <td>Ratings</td>
+            <td><input type="text" name="txtratings" placeholder="Enter Ratings" required></td>
+           </tr>
+           <tr>
+                 <td>Contact</td>
+                <td><input type="text" name="txtcontact" placeholder="Enter Contact No." required></td>
+           </tr>
+
+           <tr>
+                <td>Email</td>
+                <td><input type="text" name="txtemail" placeholder="Enter Email" required></td>
+           </tr>
+
+           <tr>
+                <td>Password</td>
+                <td><input type="password" name="txtpwd" placeholder="Enter Password" required></td>
+            </tr>
+
+           
+            <tr>
+                <td>District</td>
+                   <td>
+                        <select name="sel_district" id="sel_district">
+                            <option value="">...Select...</option>
+                            {% for i in districtdata %}
+                            <option value="{{i.id}}">{{i.district_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                    <td>Place</td>
+                    <td>
+                        <select name="sel_place" id="sel_place">
+                            <option value="">...Select...</option>
+                        </select>
+                    </td>
+            </tr>
+           
+            
+            <tr>
+                <td>Address</td>
+               <td><input type="text" name="txtaddress" placeholder="Enter Address"  required></td>
+            </tr>
+
+           
+           
+            
+            <tr>
+                <td>Photo</td>
+               <td><input type="file" name="filephoto" placeholder="Upload Photo" required></td>
+            </tr>
+
+            <tr>
+                <td>License</td>
+               <td><input type="text" name="txtlicense" placeholder="Enter License Number" required></td>
+            </tr>
+
+            <tr>
+                <td>Proof</td>
+               <td><input type="file" name="fileproof" placeholder="Upload Proof" required></td>
+            </tr>
+    
+            <tr>
+                <td>Number of Floors</td>
+               <td><input type="text" name="txtfloor" placeholder="Enter Number of Floors"  required></td>
+            </tr>
+
+
+            <td colspan="2" align="center">
+                <input type="submit" name="btnsubmit" value="Save">
+                <input type="reset" name="btncancel" value="Cancel">
+            </td>
+            </tr>
+        </table>
+    </form>  
+
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $("#sel_district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Guest:ajaxplace' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_place").html(data);
+            },
+        });
+    });
+</script>
+
+
+
+ 

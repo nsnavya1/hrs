@@ -1,0 +1,56 @@
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Name</th>
+            <th>Ratings</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Place</th>
+            <th>Address</th>
+            <th>VerficationStatus</th>
+            <th>Photo</th>
+            <th>License</th>
+            <th>Date of Joining</th>
+            <th>Floor</th>
+            <th>Specification</th>
+            <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.hotel_name}}</td>
+            <td>{{i.hotel_ratings}}</td>
+            <td>{{i.hotel_contact}}</td>
+            <td>{{i.hotel_email}}</td>
+            <td>{{i.hotel_pass}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td>{{i.hotel_addr}}</td>
+            <td>{{i.hotel_vstatus}}</td>
+            <td>{{i.hotel_photo}}</td>
+            <td>{{i.hotel_license}}</td>
+            <td>{{i.hotel_doj}}</td>
+            <td>{{i.hotel_floor}}</td>
+            <td>{{i.specification.speci_name}}</td>
+            <td><a href="{% url 'Guest:delHotel' i.id %}">Delete</a>
+                <a href="{% url 'Guest:updateHotel' i.id %}">Edit</a>
+           </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+<html>
+
+-->

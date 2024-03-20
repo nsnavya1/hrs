@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place</title>
+</head>
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <tr>
+                    <td>Floor Number</td>
+                    <td><input type="text" name="txtfloor" placeholder="Enter FloorNumber" required value="{{editdata.roomdetails_floor}}"></td>
+                </tr>
+                <tr>
+                <td>RoomCount</td>
+                    <td><input type="text" name="txtcount" placeholder="Enter RoomCount" required value="{{editdata.roomdetails_count}}"></td>
+                </tr>
+                <td>Room Type</td>
+                <td>
+                    <select name="sel_roomtype" id="sel_roomtype">
+                        <option value="">...Select...</option>
+                        {% for i in roomtypedata %}
+                        <option 
+                        {% if i.id == editdata.roomtype_id %}
+                        selected
+                        {% endif %}
+                        value="{{i.id}}">{{i.roomtype_type}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Room Amount</td>
+                <td><input type="text" name="txtamount" placeholder="Enter Amount" required value="{{editdata.roomdetails_amount}}"></td>
+            </tr>
+            <tr>
+                <td>Room Occupancy</td>
+                <td><input type="text" name="txtoccupancy" placeholder="Enter Occupancy" required value="{{editdata.roomdetails_occupancy}}"></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Floor</th>
+            <th>Count</th>
+            <th>RoomType</th>
+
+
+            <th>Amount</th>
+            <th>Occupancy</th>
+            <!--<th>Action</th>-->
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.roomdetails_floor}}</td>
+            <td>{{i.roomdetails_count}}</td>
+            <td>{{i.roomtype.roomtype_type}}</td>
+
+            
+            <td>{{i.roomdetails_amount}}</td>
+            <td>{{i.roomdetails_occupancy}}</td>
+            <!--
+                <td><a href="{% url 'Hotel:delRoom' i.id %}">Delete</a>
+                 <a href="{% url 'Hotel:roomupdate' i.id %}">Edit</a>
+                </td>
+            -->
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserListAccepted</title>
+</head>
+<body>
+    <a href="{% url 'Administrator:LoadingHomePage' %}">Home</a>
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Name</th>
+            <th>Ratings</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>District</th>
+            <th>Place</th>
+            <th>Address</th>
+            <th>Photo</th>
+            <th>License</th>
+            <th>Proof</th>
+            <th>Floor Number</th>
+            <th>Action</th>
+        </tr>
+        {% for i in hoteldata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.hotel_name}}</td>
+            <td>{{i.hotel_ratings}}</td>
+            <td>{{i.hotel_contact}}</td>
+            <td>{{i.hotel_email}}</td>
+            <td>{{i.hotel_pass}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td>{{i.hotel_addr}}</td>
+            <td><img src="{{i.hotel_photo.url}}" width="150" height="150" alt=""></td>
+            <td>{{i.hotel_license}}</td>
+            <td></a><img src="{{i.hotel_proof.url}}" width="150" height="150" alt=""></td>
+            <td>{{i.hotel_floor}}</td>
+            <td>
+                <a href="{% url 'Administrator:accepthotel' i.id %}">Accept</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>

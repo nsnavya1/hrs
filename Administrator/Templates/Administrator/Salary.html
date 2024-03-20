@@ -1,0 +1,136 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <table border="1">     
+        <tr>
+            <td>FirstName</td>
+            <td><input type="text" name="txtfname"></td>
+           </tr>
+           
+           <tr>
+            <td>LastName</td>
+            <td><input type="text" name="txtlname"></td>
+           </tr>
+           
+    
+           <tr>
+            <td>Gender</td>
+            <td>
+                 <input type="radio" name="gender" value="Male">Male
+                 <input type="radio" name="gender" value="Female">Female
+             </td>
+           </tr>
+           
+           
+           <tr>
+            <td>Martial</td>
+            <td>
+                 <input type="radio" name="mar" value="Single">Single
+                 <input type="radio" name="mar" value="Married">Married
+             </td>
+           </tr>
+            
+           <tr>
+            <td>Department</td>
+            <td>
+                <select name="dept">
+                  <option value="sel">--select--</option>
+                  <option value="q1">R&D</option>
+                  <option value="q2">Administration</option>
+                </select>	      
+             </td>
+           </tr>
+
+           <tr>
+            <td>Salary</td>
+            <td><input type="number" name="numsalary"></td>
+           </tr>
+           
+           <tr>
+            <td colspan="2" align="center">
+               <input type="submit" name="btnsubmit" value="Submit">
+               <input type="reset"  name="btnreset"  value="Cancel">
+            </td>
+           </tr>
+
+           <tr>
+            <td>Name</td>
+            <td>{{name}}</td>
+           </tr>
+
+           <tr>
+            <td>Gender</td>
+            <td>{{bgender}}</td>
+           </tr>
+
+           <tr>
+            <td>Martial</td>
+            <td>{{bmartial}}</td>
+           </tr>
+        
+           <tr>
+            <td>Department</td>
+            <td>{{bdept}}</td>
+           </tr>
+
+           <tr>
+            <td>Salary</td>
+            <td>{{bsal}}</td>
+           </tr>
+
+           <tr>
+            <td>TA</td>
+            <td>{{TA}}</td>
+           </tr>
+
+           <tr>
+            <td>DA</td>
+            <td>{{DA}}</td>
+           </tr>
+
+           <tr>
+            <td>HRA</td>
+            <td>{{HRA}}</td>
+           </tr>
+
+           <tr>
+            <td>LIC</td>
+            <td>{{LIC}}</td>
+           </tr>
+
+           <tr>
+            <td>PF</td>
+            <td>{{PF}}</td>
+           </tr>
+
+           <tr>
+            <td>DEDUCTION</td>
+            <td>{{DEDUCTION}}</td>
+           </tr>
+
+           <tr>
+            <td>NET</td>
+            <td>{{NET}}</td>
+           </tr>
+
+           <tr>
+            <td>Salary</td>
+            <td>{{bsal}}</td>
+           </tr>
+
+
+
+        </table>
+        </form>
+</body>
+</html>
+
+-->

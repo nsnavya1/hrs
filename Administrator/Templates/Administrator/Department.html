@@ -1,0 +1,46 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="frmRoom" method="POST">
+        {% csrf_token %} 
+        <table align="center">
+            <tr>
+                <td>Department</td>
+                <td><input type="text" name="txtname" placeholder="Enter Deptname" value="{{editdata.dept_name}}" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+<table border="1" align="center" cellpadding="10">
+    <tr>
+        <th>Sl.No</th>
+        <th>DeptName</th>
+        <th>Action</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.dept_name}}</td>
+        <td>
+            <a href="{% url 'Administrator:delDept' i.id %}">Delete</a>
+            <a href="{% url 'Administrator:deptupdate' i.id %}">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+-->
