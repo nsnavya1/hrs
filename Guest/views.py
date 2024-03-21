@@ -53,6 +53,7 @@ def hotelRegistration(request):
 
 def Login(request):
     if request.method == "POST":
+        
         admincount = tbl_admin.objects.filter(admin_email=request.POST.get("txt_email"),admin_password=request.POST.get("txt_password")).count()
         usercount = tbl_user.objects.filter(user_status='1',user_email=request.POST.get("txt_email"),user_password=request.POST.get("txt_password")).count()
         hotelcount = tbl_newhotel.objects.filter(hotel_vstatus='1',hotel_email=request.POST.get("txt_email"),hotel_pass=request.POST.get("txt_password")).count()

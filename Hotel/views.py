@@ -43,36 +43,74 @@ def changepasswords(request):
 
 def roomInsertSelect(request):
     roomtype = tbl_roomtype.objects.all()
-    dataall=tbl_roomdetails.objects.all() 
-    #data=tbl_roomdetails.objects.get(id=request.session["hid"])
+    data=tbl_roomdetails.objects.filter(hotel=request.session["hid"])
+    hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
     if request.method=="POST":
+        hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
         roomfloor=request.POST.get('txtfloor')
         roomcount=request.POST.get('txtcount')
-        roomdis = tbl_roomtype.objects.get(id=request.POST.get('sel_roomtype'))
-        roomdata=tbl_newhotel.objects.get(id=request.session["hid"])
+        roomtype = tbl_roomtype.objects.get(id=request.POST.get('sel_roomtype'))
         roomamount=request.POST.get('txtamount')
         roomoccupancy=request.POST.get('txtoccupancy')
-        tbl_roomdetails.objects.create(roomdetails_floor=roomfloor,roomdetails_count=roomcount,roomtype=roomdis,hotel=roomdata,roomdetails_amount=roomamount,roomdetails_occupancy=roomoccupancy)
+        tbl_roomdetails.objects.create(roomdetails_floor=roomfloor,roomdetails_count=roomcount,roomtype=roomtype,hotel=hotelid,roomdetails_amount=roomamount,roomdetails_occupancy=roomoccupancy)
         return redirect("Hotel:roomInsertSelect")
     else:
-        return render(request,"Hotel/RoomDetails.html",{'dataall':dataall,"roomtypedata":roomtype})
+        return render(request,"Hotel/RoomDetails.html",{'data':data,"roomtypedata":roomtype})
 
-'''def delPlace(request,did):
-    tbl_place.objects.get(id=did).delete()
+def delRoomDetails(request,did):
+    tbl_roomdetails.objects.get(id=did).delete()
     return redirect("Hotel:roomInsertSelect")
 
-def placeupdate(request,eid):
-    room = tbl_roomtype.objects.all()
-    editdata=tbl_roomDetails.objects.get(id=eid)
+
+def HotelFacilitiesInsertSelect(request):
+    data=tbl_hotelfacility.objects.filter(hotel=request.session["hid"])
+    facilityid=tbl_facility.objects.get(id=request.session["hid"])
+    hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
     if request.method=="POST":
-        editdata.room_floor=request.POST.get('txtfloor')
-        editdata.room_count=request.POST.get('txtcount')
-        roomdis = tbl_roomtype.objects.get(id=request.POST.get('sel_room'))
-        editdata.room = roomdis
-        editdata.room_amount=request.POST.get('txtamount')
-        editdata.room_occupancy=request.POST.get('txtoccupancy')   
-        
-        editdata.save()
-        return redirect("Hotel:roomInsertSelect")
+        hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
+        facilityid=tbl_facility.objects.get(id=request.session["hid"])
+        facilityname=request.POST.get('txtfacility')
+        tbl_hotelfacility.objects.create(hotelfacility_name=facilityname,facility=facilityid,hotel=hotelid)
+        return redirect("Hotel:HotelFacilitiesInsertSelect")
     else:
-        return render(request,"Hotel\RoomDetails.html",{"editdata":editdata,"districtdata":district})'''
+        return render(request,"Hotel/HotelFacilities.html",{'data':data})
+
+def delHotelFacilities(request,did):
+    tbl_hotelfacility.objects.get(id=did).delete()
+    return redirect("Hotel:HotelFacilitiesInsertSelect")
+
+
+def MealPackagesInsertSelect(request):
+    data=tbl_mealpackages.objects.filter(hotel=request.session["hid"])
+    hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
+    if request.method=="POST":
+        hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
+        mealpackagename=request.POST.get('txtname')
+        mealpackagedesc=request.POST.get('txtdesc')
+        mealpackageamount=request.POST.get('txtamount')
+        tbl_mealpackages.objects.create(mealpackages_name=mealpackagename,mealpackages_description=mealpackagedesc,mealpackages_amount=mealpackageamount,hotel=hotelid)
+        return redirect("Hotel:MealPackagesInsertSelect")
+    else:
+        return render(request,"Hotel/MealPackages.html",{'data':data})
+
+def delMealPackages(request,did):
+    tbl_mealpackages.objects.get(id=did).delete()
+    return redirect("Hotel:MealPackagesInsertSelect")
+
+def TourPackagesInsertSelect(request):
+    data=tbl_tourpackages.objects.filter(hotel=request.session["hid"])
+    hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
+    if request.method=="POST":
+        hotelid=tbl_newhotel.objects.get(id=request.session["hid"])
+        tourpackagename=request.POST.get('txtname')
+        tourpackagedesc=request.POST.get('txtdesc')
+        tourpackageamount=request.POST.get('txtamount')
+        tbl_tourpackages.objects.create(tourpackages_name=tourpackagename,tourpackages_description=tourpackagedesc,tourpackages_amount=tourpackageamount,hotel=hotelid)
+        return redirect("Hotel:TourPackagesInsertSelect")
+    else:
+        return render(request,"Hotel/TourPackages.html",{'data':data})
+
+def delTourPackages(request,did):
+    tbl_tourpackages.objects.get(id=did).delete()
+    return redirect("Hotel:TourPackagesInsertSelect")
+

@@ -9,6 +9,15 @@ urlpatterns = [
 
     
     path('RoomDetails/', views.roomInsertSelect,name="roomInsertSelect"),
-    #path('delRoom/<int:did>', views.delRoom,name="delRoom"),
-    #path('roomupdate/<int:eid>',views.roomupdate,name="roomupdate"),
+    path('delRoomDetails/<int:did>', views.delRoomDetails,name="delRoomDetails"),
+
+
+    path('HotelFacilities/', views.HotelFacilitiesInsertSelect,name="HotelFacilitiesInsertSelect"),
+    path('delHotelFacilities/<int:did>', views.delHotelFacilities,name="delHotelFacilities"),
+
+    path('MealPackages/', views.MealPackagesInsertSelect,name="MealPackagesInsertSelect"),
+    path('delMealPackages/<int:did>', views.delMealPackages,name="delMealPackages"),
+
+    path('TourPackages/', views.TourPackagesInsertSelect,name="TourPackagesInsertSelect"),
+    path('delTourPackages/<int:did>', views.delTourPackages,name="delTourPackages"),
 ]

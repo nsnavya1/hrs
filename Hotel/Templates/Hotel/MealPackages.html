@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place</title>
+</head>
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <tr>
+                    <td>MealPackage Name</td>
+                    <td><input type="text" name="txtname" placeholder="Enter MealPackage Name" required value="{{editdata.mealpackages_name}}"></td>
+                </tr>
+                <tr>
+                <td>MealPackage Description</td>
+                    <td><input type="text" name="txtdesc" placeholder="Enter Description" required value="{{editdata.mealpackages_description}}"></td>
+                </tr>
+            <tr>
+                <td>MealPackage Amount</td>
+                <td><input type="text" name="txtamount" placeholder="Enter Amount" required value="{{editdata.mealpackages_amount}}"></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>MealPackage Name</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.mealpackages_name}}</td>
+            <td>{{i.mealpackages_description}}</td>
+            <td>{{i.mealpackages_amount}}</td>
+            <td><a href="{% url 'Hotel:delMealPackages' i.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

@@ -6,8 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{% url 'Hotel:my_pros' %}">Profile</a><br>
-    <a href="{% url 'Hotel:roomInsertSelect' %}">RoomDetails</a><br>
-    
+    <table>
+    <tr>
+        <td><a href="{% url 'Hotel:my_pros' %}">Profile</a></td>
+    </tr>
+    <tr>
+         <td><a href="{% url 'Hotel:roomInsertSelect' %}">RoomDetails</a></td>
+    </tr>
+    <tr>
+        <td><a href="{% url 'Hotel:HotelFacilitiesInsertSelect' %}">Hotel Facilities</a></td>
+    </tr>
+    <tr>
+        <td><a href="{% url 'Hotel:MealPackagesInsertSelect' %}">Meal Packages</a></td>
+    </tr>
+    <tr>
+        <td><a href="{% url 'Hotel:TourPackagesInsertSelect' %}">Tour Packages</a></td>
+    </tr>
+</table>
 </body>
 </html>

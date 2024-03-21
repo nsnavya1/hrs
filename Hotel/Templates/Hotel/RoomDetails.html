@@ -61,7 +61,7 @@
 
             <th>Amount</th>
             <th>Occupancy</th>
-            <!--<th>Action</th>-->
+            <th>Action</th>
         </tr>
         {% for i in data %}
         <tr>
@@ -69,15 +69,9 @@
             <td>{{i.roomdetails_floor}}</td>
             <td>{{i.roomdetails_count}}</td>
             <td>{{i.roomtype.roomtype_type}}</td>
-
-            
             <td>{{i.roomdetails_amount}}</td>
             <td>{{i.roomdetails_occupancy}}</td>
-            <!--
-                <td><a href="{% url 'Hotel:delRoom' i.id %}">Delete</a>
-                 <a href="{% url 'Hotel:roomupdate' i.id %}">Edit</a>
-                </td>
-            -->
+            <td><a href="{% url 'Hotel:delRoomDetails' i.id %}">Delete</a></td>
         </tr>
         {% endfor %}
 
