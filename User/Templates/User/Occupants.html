@@ -1,0 +1,85 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewUser</title>
+    <link rel="stylesheet" href="{% static 'Form.css' %}" />
+    <style>
+        body {
+            background-image: url("{% static 'Guest/images/signup2.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body> 
+    <div id="tab" >
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 align="center"><font color="white">Occupants</font></h2>
+            <table align="center" style="background-color: white;">
+
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="txtname" placeholder="Enter Name" required></td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td><input type="date" name="txtdate"></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" name="gender" value="Male">Male
+                        <input type="radio" name="gender" value="Female">Female
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact</td>
+                    <td><input type="text" name="txtcontact" placeholder="Enter Contact" required></td>
+                </tr>
+
+                <tr>
+                    <td>Proof</td>
+                    <td><input type="file" name="fileProof" required></td>
+                </tr>
+               
+
+                <tr>
+                    <td>Aadhar Number</td>
+                    <td><input type="text" name="txtaadhar" placeholder="Enter Aadhar Number" required></td>
+                </tr>
+
+                
+               
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="btnadd" value="Add">
+                        <input type="reset" name="btncancel" value="Cancel">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        {% if msg %}
+        <script>
+            alert("{{msg}}")
+            window.location = "{% url 'User:mybooking' %}"
+        </script>
+        {% endif %}
+
+    </div>
+</body>
+
+</html>
+
+
+
+{% endblock content %}

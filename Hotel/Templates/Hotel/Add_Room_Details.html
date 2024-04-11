@@ -1,0 +1,51 @@
+{% extends 'Hotel/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center">
+                <tr>
+                    <td>Room Photo</td>
+                    <td><input type="file" name="txtphoto" id=""></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><textarea name="txt_desc" id="" cols="20" rows="5"></textarea></td>
+                </tr>
+                
+                <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Photo</th>
+            <th>Description</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><img src="{{i.room_photo.url}}" width="150" height="150" alt=""></td>
+            <td>{{i.room_desc}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
+{% endblock content %}

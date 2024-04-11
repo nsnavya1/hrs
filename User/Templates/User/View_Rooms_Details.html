@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .sub {
+            padding: 20px;
+            background-color: #E1F5FE;
+            width: fit-content;
+            border-radius: 16px;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="main" id="result">
+        {% for i in data %}
+        <div class="sub">
+            <div><img src="{{i.room_photo.url}}" width="150" height="150" alt=""></div>
+            <div>{{i.room_desc}}</div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

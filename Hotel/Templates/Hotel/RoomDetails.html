@@ -1,48 +1,65 @@
+{% extends 'Hotel/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place</title>
 </head>
+
 <body>
 
     <form method="POST">
         {% csrf_token %}
         <table align="center">
             <tr>
-                <tr>
-                    <td>Floor Number</td>
-                    <td><input type="text" name="txtfloor" placeholder="Enter FloorNumber" required value="{{editdata.roomdetails_floor}}"></td>
-                </tr>
-                <tr>
+            <tr>
+                <td>Floor Number</td>
+                <td>
+                    <select name="txtfloor" id="">
+                        <option value="">Select Floor</option>
+                        {% for i in floornumberdata %}
+                        <option value="{{i}}">{{i}}</option>
+                        {% endfor %}
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>RoomCount</td>
-                    <td><input type="text" name="txtcount" placeholder="Enter RoomCount" required value="{{editdata.roomdetails_count}}"></td>
-                </tr>
+                <td><input type="text" name="txtcount" placeholder="Enter RoomCount" required
+                        value="{{editdata.roomdetails_count}}"></td>
+            </tr>
+            <tr>
                 <td>Room Type</td>
                 <td>
                     <select name="sel_roomtype" id="sel_roomtype">
                         <option value="">...Select...</option>
                         {% for i in roomtypedata %}
-                        <option 
-                        {% if i.id == editdata.roomtype_id %}
-                        selected
-                        {% endif %}
-                        value="{{i.id}}">{{i.roomtype_type}}</option>
+                        <option value="{{i.id}}">
+                            {{i.roomtype_type}}</option>
                         {% endfor %}
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Room Amount</td>
-                <td><input type="text" name="txtamount" placeholder="Enter Amount" required value="{{editdata.roomdetails_amount}}"></td>
+                <td><input type="text" name="txtamount" placeholder="Enter Amount" required
+                        value="{{editdata.roomdetails_amount}}"></td>
             </tr>
             <tr>
                 <td>Room Occupancy</td>
-                <td><input type="text" name="txtoccupancy" placeholder="Enter Occupancy" required value="{{editdata.roomdetails_occupancy}}"></td>
+                <td><input type="text" name="txtoccupancy" placeholder="Enter Occupancy" required
+                        value="{{editdata.roomdetails_occupancy}}"></td>
             </tr>
             <tr>
-                
+
                 <td colspan="2" align="center">
                     <input type="submit" name="btnsubmit" value="Save">
                     <input type="reset" name="btncancel" value="Cancel">
@@ -71,11 +88,16 @@
             <td>{{i.roomtype.roomtype_type}}</td>
             <td>{{i.roomdetails_amount}}</td>
             <td>{{i.roomdetails_occupancy}}</td>
-            <td><a href="{% url 'Hotel:delRoomDetails' i.id %}">Delete</a></td>
+            <td><a href="{% url 'Hotel:delRoomDetails' i.id %}">Delete</a>
+                <a href="{% url 'Hotel:adddetails' i.id %}">Add Details</a>
+            </td>
         </tr>
         {% endfor %}
 
     </table>
 
 </body>
+
 </html>
+
+{% endblock content %}

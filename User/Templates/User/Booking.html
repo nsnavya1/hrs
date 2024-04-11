@@ -1,0 +1,148 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewUser</title>
+    
+</head>
+
+<body> 
+    <div id="tab" >
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 align="center"><font color="white">BOOKING</font></h2>
+            <table align="center" style="background-color: white;">
+
+
+
+                <tr>
+                    <td>Check In Date </td>
+                    <td><input type="date" name="txtcheckin"></td>
+                </tr>
+
+                <tr>
+                    <td>Check Out Date</td>
+                    <td><input type="date" name="txtcheckout"></td>
+                </tr>
+
+                <tr>
+                    <td>Number Of Guest</td>
+                    <td><input type="text" name="txtguest" placeholder="Enter No of Guest" ></td>
+                </tr>
+                
+                <tr>
+                    <td>Floor Number</td>
+                    <td>
+                        <select name="txtfloor" id="txtfloor">
+                            <option value="">Select Floor</option>
+                            {% for i in floornumberdata %}
+                            <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+    
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>Room Type</td>
+                    <td>
+                        <select name="sel_roomtype" id="sel_roomtype">
+                            <option value="">...Select...</option>
+                           
+                        </select>
+                    </td>
+                </tr>
+                
+                
+
+                <tr>
+                    <td>Meal Package</td>
+                    <td>
+                        <select name="sel_mealpackages" id="sel_mealpackages" >
+                            <option value="">...Select...</option>
+                            {% for i in mealpackagesdata %}
+                            <option value="{{i.id}}">
+                                {{i.mealpackages_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    </tr>
+
+                    <tr>
+                        <td>Tour Package</td>
+                        <td>
+                            <select name="sel_tourpackages" id="sel_tourpackages" >
+                                <option value="">...Select...</option>
+                                {% for i in tourpackagesdata %}
+                                <option value="{{i.id}}">
+                                    {{i.tourpackages_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        </tr>
+
+                        <tr>
+                            <td>Pick and Drop Service</td>
+                            <td>
+                                <select name="sel_pickanddrophead" id="sel_pickanddrophead" >
+                                    <option value="">...Select...</option>
+                                    {% for i in pickanddropheaddata %}
+                                    <option value="{{i.id}}">
+                                        {{i.pickanddrophead_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            </tr>
+
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="btnsubmit" value="Save">
+                        <input type="reset" name="btncancel" value="Cancel">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+
+    </div>
+</body>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location = "{% url 'User:mybooking' %}"
+</script>
+{% endif %}
+{% if msg1 %}
+<script>
+    alert("{{msg1}}")
+    window.location = "{% url 'User:booking' hid %}"
+</script>
+{% endif %}
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $("#txtfloor").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'User:ajaxroomtype' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_roomtype").html(data);
+            },
+        });
+    });
+</script>
+{% endblock content %}

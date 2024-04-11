@@ -1,0 +1,72 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table cellpadding="10">
+        <tr>
+            <td>#</td>
+            <td>Date</td>
+            <td>Check In</td>
+            <td>Check Out</td>
+            <td>No Of Guest</td>
+            <td>Amount</td>
+            <td>Hotel</td>
+            <td>Meal Pack</td>
+            <td>Pick up Pack</td>
+            <td>Tour Pack</td>
+            <td>Action</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.booking_date}}</td>
+            <td>{{i.booking_checkin}}</td>
+            <td>{{i.booking_checkout}}</td>
+            <td>{{i.booking_noofguest}}</td>
+            <td>
+                {% if i.booking_amount == 0 %}
+                <span style="color: red;">N/A</span>
+                {% else %}
+                {{i.booking_amount}}
+                {% endif %}
+            </td>
+            <td>{{i.hotel.hotel_name}}</td>
+            <td>{{i.mealpackages.mealpackages_name}}</td>
+            <td>{{i.pickanddrophead.pickanddrophead_name}}</td>
+            <td>{{i.tourpackages.tourpackages_name}}</td>
+            <td>
+                {% if  i.booking_amount == 0 %}
+                <span>Pending</span>    | <a href="{% url 'User:occupants' i.id %}">Add Occupents</a>
+                {% elif i.booking_status == 1%}
+                Accepted | <a href="{% url 'User:payment' i.id %}">Make payment</a>
+                {% elif i.booking_status == 2%}
+                <!-- Rejected -->
+                <span>Rejected</span>
+                {% elif i.booking_status == 3%}
+                Payment Completed | <a href="{% url 'User:rating' i.id %}">Rate</a> | <a href="{% url 'User:cancelbooking' i.id %}">Cancel Booking</a>
+                {% elif i.booking_status == 4 %}
+                <span>Hotel Accepted</span> | <a href="{% url 'User:rating' i.id %}">Rate</a> | <a href="{% url 'User:cancelbooking' i.id %}">Cancel Booking</a>
+                {% elif i.booking_status == 5 %}
+                <span>Admin Accepted</span> | <a href="{% url 'User:rating' i.id %}">Rate</a> | <a href="{% url 'User:cancelbooking' i.id %}">Cancel Booking</a>
+                {% elif i.booking_status == 6 %}
+                <span>Booking Cancelled</span>
+                {% else %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+
+{% endblock content %}

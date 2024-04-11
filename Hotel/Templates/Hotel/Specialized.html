@@ -1,0 +1,61 @@
+{% extends 'Hotel/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place</title>
+</head>
+
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Specification</td>
+                <td>
+                    <select name="sel_speci" id="sel_speci">
+                        <option value="">...Select...</option>
+                        {% for i in specidata %}
+                        <option value="{{i.id}}">
+                            {{i.speci_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Specification</th>
+            <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.speci.speci_name}}</td>
+            <td><a href="{% url 'Hotel:delspecialized' i.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>
+
+{% endblock content %}

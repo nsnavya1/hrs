@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from Administrator.models import *
 from Guest.models import *
+from User.models import *
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 
 def LoadingHomePage(request):
@@ -199,7 +202,7 @@ def delRoomType(request,did):
 def updRoomType(request,eid):
     editdata=tbl_roomtype.objects.get(id=eid)
     if request.method=="POST":
-        editdata.room_type=request.POST.get("txtroom")
+        editdata.roomtype_type=request.POST.get("txtroom")
         editdata.save()
         return redirect("Administrator:roomtype")
     else:
@@ -381,3 +384,71 @@ def hotelListAccepted(request):
 def hotelListRejected(request):
     hoteldata = tbl_newhotel.objects.filter(hotel_vstatus=2)
     return render(request,"Administrator/HotelListRejected.html",{"hoteldata":hoteldata})
+
+def aadhar(request):
+    data=tbl_aadhar.objects.all()
+    if request.method=="POST":
+        aadharname=request.POST.get('txtname')
+        aadharno=request.POST.get('txtaadhar')
+        tbl_aadhar.objects.create(aadhar_name=aadharname,aadhar_number=aadharno)
+        return redirect("Administrator:aadhar")
+    else:
+        return render(request,"Administrator/Aadhar.html",{'data':data})
+    
+
+def delAadhar(request,did):
+    tbl_aadhar.objects.get(id=did).delete()
+    return redirect("Administrator:aadhar")
+
+def userbooking(request):
+    booking = tbl_booking.objects.all()
+    return render(request,"Administrator/User_Booking.html",{"data":booking})
+
+def sendmail(request,id):
+    booking = tbl_booking.objects.get(id=id)
+    user_email = booking.user.user_email
+    user = booking.user.user_name
+    hotal_name = booking.hotel.hotel_name
+    amount = booking.booking_amount
+    send_mail(
+            f"Dear {user}",  # Subject
+            (f"We are delighted to confirm your upcoming stay with us at {hotal_name}! Your adventure begins here.\r\n"
+            "Below you will find all the important details of your reservation.\r\n"
+            "Please review them to ensure everything is as per your plans:\r\n"
+            "Reservation Details:\r\n"
+            f"Hotel Name: {hotal_name}\r\n"
+            f"Amount: {amount}\r\n"),
+            settings.EMAIL_HOST_USER,
+            [user_email],
+        )
+    booking.booking_status = 5
+    booking.save()
+    return redirect("Administrator:userbooking")
+
+def viewcomplaint(request):
+    user = tbl_user.objects.all()
+    hotel = tbl_newhotel.objects.all()
+    usercom = tbl_complaint.objects.filter(user__in=user,complaint_status=0)
+    hotelcom = tbl_complaint.objects.filter(hotel__in=hotel,complaint_status=0)
+    return render(request,"Administrator/View_complaint.html",{"user":usercom,"hotel":hotelcom})
+
+def reply(request,id):
+    com = tbl_complaint.objects.get(id=id)
+    if request.method == "POST":
+        com.complaint_status = 1
+        com.complaint_reply = request.POST.get("txt_reply")
+        com.save()
+        return redirect("Administrator:viewcomplaint")
+    else:
+        return render(request,"Administrator/Reply.html")
+    
+def viewreplyedcomplaint(request):
+    user = tbl_user.objects.all()
+    hotel = tbl_newhotel.objects.all()
+    usercom = tbl_complaint.objects.filter(user__in=user,complaint_status=1)
+    hotelcom = tbl_complaint.objects.filter(hotel__in=hotel,complaint_status=1)
+    return render(request,"Administrator/View_Replyed_Complaints.html",{"user":usercom,"hotel":hotelcom})
+
+def logout(request):
+    del request.session['adminid']
+    return redirect("Guest:Login")

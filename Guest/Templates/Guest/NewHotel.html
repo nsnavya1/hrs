@@ -1,14 +1,29 @@
+{% extends 'Guest/Header.html' %}
+{% load static %}
+{% block content %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <link rel="stylesheet" href="{% static 'Form.css' %}" /> -->
+    <!-- <style>
+        body {
+            background-image: url("{% static 'Guest/images/signup2.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style> -->
 </head>
 <body>
+    <div id="tab">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table border="1">     
+        <h2 align="center"><font color="white">Sign Up</font></h2>
+        <table border="1" align="center" style="background-color: white;">     
         <tr>
             <td>Name</td>
             <td><input type="text" name="txtname" placeholder="Enter Hotel Name" required></td>
@@ -53,7 +68,32 @@
                         </select>
                     </td>
             </tr>
-           
+
+            <tr>
+                <td>Specification</td>
+                   <td>
+                        <select name="sel_spe" id="sel_spe">   
+                            <!-- spe -->
+                            <option value="">...Select...</option>
+                            {% for i in spefication %}
+                            <option value="{{i.id}}">{{i.speci_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+
+                        <!-- <td>Specification</td>
+                        <td>
+                            <select name="sel_speci" id="sel_speci">
+                                <option value="">...Select...</option>
+                                {% for i in specidata %}
+                                <option value="{{i.id}}">
+                                    {{i.speci_name}}</option>
+                                {% endfor %}
+                            </select>
+                         </td> -->
+                    <!-- </tr> --> 
+            </tr>
             
             <tr>
                 <td>Address</td>
@@ -82,6 +122,10 @@
                 <td>Number of Floors</td>
                <td><input type="text" name="txtfloor" placeholder="Enter Number of Floors"  required></td>
             </tr>
+            <tr>
+                <td>Hotel Location</td>
+               <td><input type="url" name="txturl" placeholder="Enter url"  required></td>
+            </tr>
 
 
             <td colspan="2" align="center">
@@ -91,7 +135,7 @@
             </tr>
         </table>
     </form>  
-
+</div>
 </body>
 </html>
 
@@ -113,4 +157,4 @@
 
 
 
- 
+{% endblock content %}

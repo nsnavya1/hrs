@@ -20,4 +20,24 @@ urlpatterns = [
 
     path('TourPackages/', views.TourPackagesInsertSelect,name="TourPackagesInsertSelect"),
     path('delTourPackages/<int:did>', views.delTourPackages,name="delTourPackages"),
+
+    path('PickAndDropHead/',views.pickanddropinsertselect,name="pickanddropinsertselect"),
+    path('delPickAndDropHead/<int:did>', views.delpickanddrop,name="delpickanddrop"),
+
+    path('Specialized/', views.specializedInsertSelect,name="specializedInsertSelect"),
+    path('delSpecialized/<int:did>', views.delspecialized,name="delspecialized"),
+
+    path('Userbooking/',views.userbooking,name="userbooking"),
+
+    path('acceptbooking/<int:aid>',views.acceptbooking,name="acceptbooking"),
+    path('rejectbooking/<int:rid>',views.rejectbooking,name="rejectbooking"),
+    path('sentconfirmation/<int:id>',views.sentconfirmation,name="sentconfirmation"),
+
+    path('adddetails/<int:id>',views.adddetails,name="adddetails"),
+
+    path('Complaint/',views.complaint,name="complaint"),
+    path('MyComplaints/',views.mycomplaints,name="mycomplaints"),
+
+    path('logout/',views.logout,name="logout"),
+
 ]

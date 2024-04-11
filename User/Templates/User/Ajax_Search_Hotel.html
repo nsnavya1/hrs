@@ -1,0 +1,16 @@
+{% for i,j in data %}
+<div class="sub">
+    <div><img src="{{i.hotel_photo.url}}" width="150" height="150" alt=""></div>
+    <div>{{i.hotel_name}}</div>
+    <div>{{i.hotel_addr}}</div>
+    <div>{{i.hotel_contact}}</div>
+    <div>
+        {% for k in ar %} {% if k <= j %}
+        <i class="fas fa-star text-warning"></i>
+        {% else %}
+        <i class="fas fa-star star-light"></i>
+        {% endif %} {% endfor %}
+    </div>
+    <div><a href="{% url 'User:viewmore' i.id %}">Viewmore</a></div>
+</div>
+{% endfor %}

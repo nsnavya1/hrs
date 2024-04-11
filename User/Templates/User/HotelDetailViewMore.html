@@ -1,0 +1,114 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <table border="1" align="center" cellpadding="10">
+        
+        <tr>
+            <td colspan="2" align="center"><img src="{{data.hotel_photo.url}}" width="150" height="150" alt=""></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{data.hotel_name}}</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>{{data.hotel_addr}}</td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td>{{data.hotel_contact}}</td>
+        </tr>
+        <tr>
+            <td>Number of Floors</td>
+            <td>{{data.hotel_floor}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{data.hotel_email}}</td>
+        </tr>
+        <tr>
+            <td>Specialized </td>
+            <td>{{data.hotel_spe.speci_name}}</td>
+        </tr>
+        <tr>
+            <td>Meal Package Details</td>
+            <td>
+               <a href="{% url 'User:mealpackage' data.id %}">Meal Package</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Tour Package Details</td>
+            <td>
+                 <a href="{% url 'User:tourpackage' data.id %}">Tour Package</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Pick And Drop Details</td>
+            <td>
+                 <a href="{% url 'User:vpickanddrop' data.id %}">Pick And Drop</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                 <a href="{% url 'User:booking' data.id %}">Book Now</a>
+            </td>
+        </tr>
+        
+       
+
+    </table>
+
+    <h3>Hotel Facility</h3>
+    <table>
+        <tr>
+            <th>Facilitys</th>
+        </tr>
+        {% for i in facility %}
+        <tr>
+            <td>{{i.hotelfacility_name}}</td>
+        </tr>
+        {% endfor %}
+        {% for i in common %}
+        <tr>
+            <td>{{i.facility_name}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Hotel Room Details</h3>
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Room Type</td>
+            <td>Price</td>
+            <td>Floor</td>
+            <td>Room Count</td>
+            <td>Occupancy Count</td>
+            <td>Action</td>
+        </tr>
+        {% for i in roomdetails %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.roomtype.roomtype_type}}</td>
+            <td>{{i.roomdetails_amount}}</td>
+            <td>{{i.roomdetails_floor}}</td>
+            <td>{{i.roomdetails_count}}</td>
+            <td>{{i.roomdetails_occupancy}}</td>
+            <td><a href="{% url 'User:ViewRooms' i.id %}">View Rooms</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> MY COMPLAINTS</title>
+   
+</head>
+
+<body> 
+    <div id="tab" >
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <table border="1" align="center" style="background-color: white;">
+
+                <tr>
+                    <td>Serial No</td>
+                    <td>Title</td>
+                    <td>Complaint</td>
+                    <td>Reply</td>           
+                    <td>Date</td> 
+                </tr>
+                {% for i in complaint %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.complaint_title}}</td>
+                    <td>{{i.complaint_description}}</td>
+                    <td>{% if i.complaint_reply == "" %}
+                        N/A
+                        {% else %}
+                        {{i.complaint_reply}}
+                        {% endif %}
+                        </td>           
+                    <td>{{i.complaint_date}}</td> 
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+
+
+    </div>
+</body>
+
+</html>
+
+
+
+{% endblock content %}

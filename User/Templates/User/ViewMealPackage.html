@@ -1,0 +1,34 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>package</h1>
+    <a href="{% url 'User:viewmore' hotel %}">Back</a>
+    <table border="1" align="center" cellpadding="10">
+
+
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.mealpackages_name}}</td>
+            <td>{{i.mealpackages_description}}</td>
+            <td>{{i.mealpackages_amount}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
+
+
+
+{% endblock content %}

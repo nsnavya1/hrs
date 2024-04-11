@@ -1,3 +1,7 @@
+{% extends 'Administrator/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +25,7 @@
             </tr>
         </table>
     </form>
-</body>
-</html>
+
 
 <table border="1" align="center" cellpadding="10">
     <tr>
@@ -42,3 +45,9 @@
     {% endfor %}
 
 </table>
+
+</body>
+</html>
+
+
+{% endblock content %}

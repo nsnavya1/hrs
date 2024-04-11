@@ -1,18 +1,24 @@
-<!--
+{% extends 'Administrator/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <form name="frmSpecification" method="POST">
-        {% csrf_token %} 
+        {% csrf_token %}
         <table align="center">
             <tr>
                 <td>Specification Name</td>
-                <td><input type="text" name="txtspeci" placeholder="Enter Specification" value="{{editdata.speci_name}}" required></td>
+                <td><input type="text" name="txtspeci" placeholder="Enter Specification" value="{{editdata.speci_name}}"
+                        required></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
@@ -22,25 +28,28 @@
             </tr>
         </table>
     </form>
+
+
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Specification Name</th>
+            <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.speci_name}}</td>
+            <td>
+                <a href="{% url 'Administrator:delSpeci' i.id %}">Delete</a>
+                <a href="{% url 'Administrator:speciupdate' i.id %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
 </body>
+
 </html>
-
-<table border="1" align="center" cellpadding="10">
-    <tr>
-        <th>Sl.No</th>
-        <th>Specification Name</th>
-        <th>Action</th>
-    </tr>
-    {% for i in data %}
-    <tr>
-        <td>{{forloop.counter}}</td>
-        <td>{{i.speci_name}}</td>
-        <td>
-            <a href="{% url 'Administrator:delSpeci' i.id %}">Delete</a>
-            <a href="{% url 'Administrator:speciupdate' i.id %}">Edit</a>
-        </td>
-    </tr>
-    {% endfor %}
-
-</table>
--->
+{% endblock content %}

@@ -1,0 +1,58 @@
+ <!-- Header Section Begin -->
+ <header class="header">
+        
+    <div class="header__nav__option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="{% static 'Mains/img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="header__nav">
+                        <nav class="header__menu">
+                            <ul class="menu__class">
+                                 <li class="active"><a href="{% url 'User:homepage' %}">Home</a></li>
+                                <li><a href="{% url 'User:my_pro' %}">My profile</a></li>
+                                <li><a href="{% url 'User:mycomplaints' %}"> Complaints</a></li>
+                                <li><a href="{% url 'Guest:Login' %}">Logout</a></li>
+                                
+
+                                <!-- <li><a href="#">Profile</a>
+                                    <ul class="dropdown">
+                                        <li><a href="{% url 'Hotel:my_pros' %}">Profile</a></li>
+                                        <li><a href="{% url 'Guest:Login' %}">Log Out</a></li>
+                                    </ul>
+                                </li>  -->
+                            </ul>
+                        </nav>
+                        <div class="header__nav__widget">
+                            <a href="{% url 'User:searchhotel' %}">Search</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <span class="fa fa-bars"></span>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'User:my_pro' %}">Profile</a><br>
+    <a href="{% url 'User:mybooking' %}">My Booking</a><br>
+    
+    
+</body>
+</html> -->

@@ -15,7 +15,7 @@ class tbl_roomdetails(models.Model):
 
 class tbl_hotelfacility(models.Model):
     hotelfacility_name=models.CharField(max_length=50) 
-    facility =models.ForeignKey(tbl_facility, on_delete=models.CASCADE)
+    # facility =models.ForeignKey(tbl_facility, on_delete=models.CASCADE)
     hotel =models.ForeignKey(tbl_newhotel,on_delete=models.CASCADE)
 
 class tbl_mealpackages(models.Model):
@@ -29,4 +29,21 @@ class tbl_tourpackages(models.Model):
     tourpackages_description=models.CharField(max_length=50)
     tourpackages_amount=models.CharField(max_length=50)
     hotel =models.ForeignKey(tbl_newhotel,null=True,on_delete=models.CASCADE)
-   
+
+class tbl_pickanddrophead(models.Model):
+    pickanddrophead_name=models.CharField(max_length=50)
+    pickanddrophead_amount=models.CharField(max_length=50)
+    hotel =models.ForeignKey(tbl_newhotel,null=True,on_delete=models.CASCADE)
+    
+
+
+class tbl_specialized(models.Model):
+    speci =models.ForeignKey(tbl_specification, on_delete=models.CASCADE)
+    hotel =models.ForeignKey(tbl_newhotel,null=True,on_delete=models.CASCADE)
+
+class tbl_room_description(models.Model):
+    room_photo = models.FileField(upload_to='Room_Photos/')
+    room_desc = models.CharField(max_length=100)
+    room =models.ForeignKey(tbl_roomdetails,on_delete=models.CASCADE)
+
+    

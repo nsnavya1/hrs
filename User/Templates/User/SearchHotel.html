@@ -1,0 +1,145 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <style>
+        .sub {
+            padding: 20px;
+            background-color: #E1F5FE;
+            width: fit-content;
+            border-radius: 16px;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="1">     
+                  
+            <tr>
+                <td>District</td>
+                   <td>
+                        <select name="sel_district" id="sel_district" onchange="searchHotel()">
+                            <option value="">...Select...</option>
+                            {% for i in districtdata %}
+                            <option value="{{i.id}}">{{i.district_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>Place</td>
+                    <td>
+                        <select name="sel_place" id="sel_place" onchange="searchHotel()">
+                            <option value="">...Select...</option>
+                        </select>
+                    </td>
+                    <td>Specificaation</td>
+                    <td>
+                        <select name="sel_spe" id="sel_spe" onchange="searchHotel()">
+                            <option value="">...Select...</option>
+                            {% for i in spe %}
+                            <option value="{{i.id}}">{{i.speci_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>Rating</td>
+                    <td><input type="text" name="txt_rating" id="txt_rating" onkeyup="searchHotel()"></td>
+                    
+            </tr>
+        </table>
+
+        <div class="main" id="result">
+            {% for i,j in data %}
+            <div class="sub">
+                <div><img src="{{i.hotel_photo.url}}" width="150" height="150" alt=""></div>
+                <div>{{i.hotel_name}}</div>
+                <div>{{i.hotel_addr}}</div>
+                <div>{{i.hotel_contact}}</div>
+                <div>
+                    {% for k in ar %} {% if k <= j %}
+                    <i class="fas fa-star text-warning"></i>
+                    {% else %}
+                    <i class="fas fa-star star-light"></i>
+                    {% endif %} {% endfor %}
+                </div>
+                <div><a href="{% url 'User:viewmore' i.id %}">Viewmore</a></div>
+            </div>
+            {% endfor %}
+        </div>
+    </form>  
+
+    
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $("#sel_district").change(function () {
+        var did = $(this).val();
+        var pid = document.getElementById("sel_place").value
+        var spe = document.getElementById("sel_spe").value
+        var rate = document.getElementById("txt_rating").value
+        var ur = "{% url 'User:ajaxplace2' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_place").html(data);
+                var ur = "{% url 'User:ajaxsearchhotel' %}"
+                $.ajax({
+                    url: ur,
+                    data: { pid: pid,did: did,rate: rate,spe: spe },
+                    success: function (data) {
+                        $("#result").html(data);
+                    },
+                });
+            },
+        });
+    });
+
+    function searchHotel() {
+        var pid = document.getElementById("sel_place").value
+        var did = document.getElementById("sel_district").value
+        var rate = document.getElementById("txt_rating").value
+        var spe = document.getElementById("sel_spe").value
+        // console.log(rate);
+        var ur = "{% url 'User:ajaxsearchhotel' %}"
+        $.ajax({
+            url: ur,
+            data: { pid: pid,did: did,rate: rate,spe: spe },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+    }
+</script>
+
+
+
+{% endblock content %}

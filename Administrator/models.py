@@ -36,3 +36,7 @@ class tbl_specification(models.Model):
 
 class tbl_facility(models.Model):
     facility_name=models.CharField(max_length=50)
+
+class tbl_aadhar(models.Model):
+    aadhar_name=models.CharField(max_length=50)
+    aadhar_number=models.CharField(max_length=50)

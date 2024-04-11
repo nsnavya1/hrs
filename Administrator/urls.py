@@ -68,4 +68,18 @@ urlpatterns = [
     path('HotelListAccepted/',views.hotelListAccepted,name="hotelListAccepted"),
     path('HotelListRejected/',views.hotelListRejected,name="hotelListRejected"),
 
+
+    path('Aadhar/',views.aadhar,name="aadhar"),
+    path('delAadhar/<int:did>', views.delAadhar,name="delAadhar"),
+
+    path('userbooking/', views.userbooking,name="userbooking"),
+    path('sendmail/<int:id>', views.sendmail,name="sendmail"),
+
+    path('viewcomplaint/', views.viewcomplaint,name="viewcomplaint"),
+    path('reply/<int:id>', views.reply,name="reply"),
+    path('viewreplyedcomplaint/', views.viewreplyedcomplaint,name="viewreplyedcomplaint"),
+
+    path("logout/",views.logout,name="logout"),
+
+
 ]

@@ -29,6 +29,13 @@ class tbl_newhotel(models.Model):
     hotel_photo = models.FileField(upload_to='Assets/HotelPhoto/')
     hotel_proof = models.FileField(upload_to='Assets/HotelProof/')                           
     hotel_license=models.CharField(max_length=50)                            
-    hotel_floor=models.CharField(max_length=50)
+    hotel_floor=models.CharField(max_length=50,null=True)
     hotel_doj=models.DateField(auto_now_add=True)
+    hotel_url = models.CharField(max_length=150,null=True)
+    #speci = models.ForeignKey(tbl_specification,on_delete=models.SET_NULL,null=True)
+    hotel_spe = models.ForeignKey(tbl_specification,on_delete=models.SET_NULL,null=True)
     
+class tbl_floor(models.Model):
+    floor_count=models.CharField(max_length=50)
+    hotel = models.ForeignKey(tbl_newhotel, on_delete=models.CASCADE)
+   

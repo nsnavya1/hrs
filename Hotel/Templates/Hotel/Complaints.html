@@ -1,0 +1,51 @@
+{% extends 'Hotel/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPLAINTS</title>
+   
+</head>
+
+<body> 
+    <div id="tab" >
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <table align="center" style="background-color: white;">
+
+                <tr>
+                    <td>Title</td>
+                    <td><input type="text" name="txttitle" placeholder="Enter Title" required></td>
+                </tr>
+                <tr>
+                    <td>Complaint</td>
+                    <td>
+                    <textarea name="txtcomplaint" rows="2" cols="16" type="text" required></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="btnsubmit" value="Save">
+                        <input type="reset" name="btncancel" value="Cancel">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+
+    </div>
+</body>
+
+</html>
+
+
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+
+
+{% extends 'Hotel/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="frmRoom" method="POST">
+        {% csrf_token %} 
+        <table align="center">
+            <tr>
+                <td>Floor Number</td>
+                <td><input type="text" name="txtfloor" placeholder="Enter Floor Number" value="{{editdata.floor_no}}" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+<table border="1" align="center" cellpadding="10">
+    <tr>
+        <th>Sl.No</th>
+        <th>RoomType</th>
+        <th>Action</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.floor_no}}</td>
+        <td>
+            <a href="{% url 'Hotel:delfloor' i.id %}">Delete</a>
+            <a href="{% url 'Hotel:updfloor' i.id %}">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+{% endblock content %}

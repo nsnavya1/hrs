@@ -1,0 +1,75 @@
+{% extends 'Administrator/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table cellpadding="10">
+        <tr>
+            <td>#</td>
+            <td>Date</td>
+            <td>Check In</td>
+            <td>Check Out</td>
+            <td>No Of Guest</td>
+            <td>Amount</td>
+            <td>User</td>
+            <td>Meal Pack</td>
+            <td>Pick up Pack</td>
+            <td>Tour Pack</td>
+            <td>Action</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.booking_date}}</td>
+            <td>{{i.booking_checkin}}</td>
+            <td>{{i.booking_checkout}}</td>
+            <td>{{i.booking_noofguest}}</td>
+            <td>
+                {% if i.booking_amount == 0 %}
+                <span style="color: red;">N/A</span>
+                {% else %}
+                {{i.booking_amount}}
+                {% endif %}
+            </td>
+            <td>{{i.user.user_name}}</td>
+            <td>{{i.mealpackages.mealpackages_name}}</td>
+            <td>{{i.pickanddrophead.pickanddrophead_name}}</td>
+            <td>{{i.tourpackages.tourpackages_name}}</td>
+            <td>
+                {% if i.booking_status == 0 %}
+                pending
+                {% elif i.booking_status == 1 %}
+                Accepted
+                {% elif i.booking_status == 2 %}
+                Rejected
+                {% elif i.booking_status == 3 %}
+                Payed | 
+                {% elif i.booking_status == 4 %}
+                Hotel Accepted | <a href="{% url 'Administrator:sendmail' i.id %}">Sent Mail</a>
+                {% elif i.booking_status == 5 %}
+                Admin Accepted
+                {% elif i.booking_status == 6 %}
+                Booking Cancelled
+                {% else %}
+                pending
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
+
+
+{% endblock content %}
